@@ -3,9 +3,6 @@ build/
 dist/
 *.egg-info/
 
-# Zipped release (upload manually to GitHub Releases)
-SnapMac.zip
-
 # Python
 __pycache__/
 *.py[cod]
@@ -31,3 +28,5 @@ env/
 .idea/
 
 snapmac.png
+
+SnapMac.zip

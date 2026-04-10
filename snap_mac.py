@@ -442,14 +442,17 @@ class Calibrator:
         log(f"Calibration snap {count}/{self._target}: RMS={rms:.4f}")
         
         if count >= self._target:
-            self.stop()
-            avg_rms = float(np.mean(self._snaps))
-            new_sensitivity = max(0.08, round(avg_rms * 0.5, 4))
-            self.config["sensitivity"] = new_sensitivity
-            self.config["noise_floor"] = float(np.percentile(self._snaps, 25)) * 0.5
-            save_config(self.config)
-            log(f"Calibration complete. Sensitivity: {new_sensitivity}")
-            self.on_complete(new_sensitivity, count)
+            snaps_copy = list(self._snaps)
+            def _finish():
+                self.stop()
+                avg_rms = float(np.mean(snaps_copy))
+                new_sensitivity = max(0.08, round(avg_rms * 0.5, 4))
+                self.config["sensitivity"] = new_sensitivity
+                self.config["noise_floor"] = float(np.percentile(snaps_copy, 25)) * 0.5
+                save_config(self.config)
+                log(f"Calibration complete. Sensitivity: {new_sensitivity}")
+                self.on_complete(new_sensitivity, count)
+            threading.Thread(target=_finish, daemon=True).start()
 
 
 def _set_process_name(name):
