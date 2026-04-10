@@ -1,0 +1,33 @@
+# Build output
+build/
+dist/
+*.egg-info/
+
+# Zipped release (upload manually to GitHub Releases)
+SnapMac.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# macOS
+.DS_Store
+*.dmg
+
+# App config (user-specific, stored locally)
+~/.snapmac.json
+
+# Runtime
+/tmp/snapmac.pid
+
+# IDE
+.vscode/
+.idea/
+
+snapmac.png

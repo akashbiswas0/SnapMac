@@ -1,0 +1,5 @@
+rumps
+sounddevice
+numpy
+pyobjc-framework-Cocoa
+py2app
